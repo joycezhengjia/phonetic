@@ -12,7 +12,7 @@
 #  License for the specific language governing permissions and limitations
 #  under the License.
 
-
+import phonetic as ph
 import os
 import sys
 from argparse import ArgumentParser
@@ -67,7 +67,7 @@ def callback():
 
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text=event.message.text)
+            TextSendMessage(text=ph.read(event.message.text))
         )
 
     return 'OK'
