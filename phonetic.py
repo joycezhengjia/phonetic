@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import random
 def read( word ):
-    word = input('請輸入中文字:')
+    # word = input('請輸入中文字:')
     url = f'https://dict.idioms.moe.edu.tw/idiomList.jsp?idiom={word}&qMd=0&qTp=1&qTp=2'
     print(url)
     user_agent = {'User-agent': 'Mozilla/5.0'}
