@@ -1,21 +1,16 @@
 import requests
 from bs4 import BeautifulSoup
-#word = input( '請輸入中文字:' )
+import random
 def read( word ):
-url = f'https://dict.revised.moe.edu.tw/search.jsp?md=1&word={word}#searchL'
-
-html = requests.get( url )
-bs = BeautifulSoup(html.text,'lxml')
-data = bs.find('table', id='searchL')
-try:
-    row = data.find_all('tr')[2]
-    chinese = row.find('cr').text
-    phones = row.find_all('code')
-    phone = [e.text for e in phones]
-    s = " ".join( phone )
-    # s = row.find('sub')
-    return  chinese + ' => ' + s
-except:
-    return '查無此字' 
-
-#read('國小')
+    word = input('請輸入中文字:')
+    url = f'https://dict.idioms.moe.edu.tw/idiomList.jsp?idiom={word}&qMd=0&qTp=1&qTp=2'
+    print(url)
+    user_agent = {'User-agent': 'Mozilla/5.0'}
+    html = requests.get(url, headers=user_agent)
+    bs = BeautifulSoup(html.text, 'html')
+    try:
+        data = bs.find_all('td', headers='thVal')
+        word = random.choice( data )
+        return ( word.div.a.text )
+    except:
+        return ('查無此字')
